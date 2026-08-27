@@ -170,7 +170,7 @@ class ClinicalReasoner:
             return result.model_copy(update={"score": None, "risk_band": "low", "threshold_ratio": None})
 
         dt = result.decision_threshold
-        new_ratio = (new_score / dt) if dt else None
+        new_ratio = (new_score / dt) if (dt is not None and dt > 0.0) else None
         moderate_ratio = 0.7
         if new_ratio is not None and new_ratio >= 1.0:
             new_band = "high"
